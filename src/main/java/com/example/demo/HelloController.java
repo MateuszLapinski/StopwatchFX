@@ -3,26 +3,47 @@ package com.example.demo;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.stage.Stage;
 import javafx.util.Duration;
+
+import java.net.URL;
 
 
 public class HelloController {
     @FXML
     private Label timeLabel, eggTimeLabel;
     @FXML
-    private Button startTimerButton, resetTimerButton, startEggButton, resetEggButton, hourButton, minuteButton, secondButton;
+    private Button startTimerButton, resetTimerButton, startEggButton, resetEggButton, hourButton, minuteButton, secondButton, exitButton;
+    //String iconStartPath="/com/example/demo/iconplay.png";
+    //public Image startImage=new Image(iconStartPath);
+//    public Image pauseImage=new Image("/iconpause.png");
+
+    @FXML
+    private ImageView startStopImageView;
+
     private int elapsedTime,elapsedTimeEgg,seconds, minutes,hours, secondsEgg,minutesEgg,hoursEgg=0;
     boolean started, startedEgg= false;
     String seconds_string,minutes_string,hours_string, seconds_stringEgg,minutes_stringEgg,hours_stringEgg;
 
     private Timeline timeLine, eggTimerTimeline;
+    private Sound sound= new Sound();
+
+    private Stage stage;
+    public void setStage(Stage stage) {
+        this.stage = stage;
+    }
 
     @FXML
     public void initialize() {
+
+//        startStopImageView.setImage(startImage);
         timeLine = new Timeline(new KeyFrame(Duration.seconds(1), this::updateTimer));
         timeLine.setCycleCount(Timeline.INDEFINITE);
 
@@ -32,13 +53,20 @@ public class HelloController {
 
     @FXML
     protected void startStopTimer() {
+
+
         if (started == false) {
                 started = true;
-                startTimerButton.setText("Stop");
+//                if(pauseImage!=null) {
+//                    startStopImageView.setImage(pauseImage);
+//                }
                 timeLine.play();
         } else {
                 started = false;
-            startTimerButton.setText("Start");
+//                if (startImage != null) {
+//                startStopImageView.setImage(startImage);
+//                }
+
                 timeLine.stop();
         }
     }
@@ -85,6 +113,7 @@ public class HelloController {
                 eggTimerTimeline.stop();
                 startedEgg = false;
                 startEggButton.setText("Start");
+                sound.play();
             }
             formatTimeEgg(eggTimeLabel);
         }
@@ -126,6 +155,23 @@ public class HelloController {
             elapsedTimeEgg+=1000;
         }
         formatTimeEgg(eggTimeLabel);
+    }
+
+    protected void getSound(){
+        for(int i=0; i<=3;i++){
+            sound.play();
+        }
+        sound.stop();
+    }
+
+    @FXML
+    public void handleExitButton(ActionEvent event) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Czy na pewno chcesz zamknąć program?", ButtonType.YES, ButtonType.NO);
+        alert.showAndWait();
+
+        if (alert.getResult() == ButtonType.YES) {
+            stage.close();
+        }
     }
 
 }

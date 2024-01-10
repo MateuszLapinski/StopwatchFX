@@ -14,18 +14,22 @@
     <stylesheets>
         <URL value="@style.css" />
     </stylesheets>
-   <children>
+    <children>
       <TabPane prefHeight="400.0" prefWidth="400.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
           <Tab text="Stoper">
             <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="323.0" prefWidth="350.0">
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="323.0" prefWidth="354.0">
                      <children>
                         <Button fx:id="startTimerButton" layoutX="90.0" layoutY="161.0" mnemonicParsing="false" onAction="#startStopTimer" prefWidth="100.0" styleClass="mainPanelButton">
                            <graphic>
-                              <ImageView fx:id="startStopImageView" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" />
+                              <ImageView fx:id="startStopImageView" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@iconplay.png" />
+                                 </image>
+                              </ImageView>
                            </graphic></Button>
-                        <Label fx:id="timeLabel" alignment="CENTER" layoutX="100.0" layoutY="61.0" prefHeight="50.0" prefWidth="200.0" text="00:00:00" textFill="#214b7e">
+                        <Label fx:id="timeLabel" alignment="CENTER" layoutX="100.0" layoutY="64.0" prefHeight="50.0" prefWidth="200.0" text="00:00:00" textFill="#2e5b9a">
                            <font>
                               <Font size="54.0" />
                            </font>
@@ -38,7 +42,7 @@
                                  </image>
                               </ImageView>
                            </graphic></Button>
-                        <Button layoutX="326.0" layoutY="315.0" mnemonicParsing="false" styleClass="mainPanelButton" text="Wyjdź" />
+                        <Button fx:id="exitButton" layoutX="280.0" layoutY="321.0" mnemonicParsing="false" onAction="#handleExitButton" prefWidth="100.0" styleClass="mainPanelButton" text="Wyjdź" />
                      </children>
                   </AnchorPane>
             </content>
@@ -47,7 +51,7 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <Label fx:id="eggTimeLabel" alignment="CENTER" layoutX="100.0" layoutY="67.0" prefHeight="50.0" prefWidth="200.0" text="00:00:00">
+                        <Label fx:id="eggTimeLabel" alignment="CENTER" layoutX="100.0" layoutY="67.0" prefHeight="50.0" prefWidth="200.0" text="00:00:00" textFill="#2e5b9a">
                            <font>
                               <Font size="54.0" />
                            </font>
@@ -55,9 +59,22 @@
                         <Button fx:id="hourButton" layoutX="118.0" layoutY="147.0" mnemonicParsing="false" onAction="#addHour" text="+" />
                         <Button fx:id="secondButton" layoutX="260.0" layoutY="147.0" mnemonicParsing="false" onAction="#addSecond" text="+" />
                         <Button fx:id="minutButton" layoutX="188.0" layoutY="147.0" mnemonicParsing="false" onAction="#addMinutes" text="+" />
-                        <Button fx:id="startEggButton" layoutX="81.0" layoutY="193.0" mnemonicParsing="false" onAction="#startStopEggTimer" prefWidth="100.0" text="Start" />
-                        <Button fx:id="resetEggTimer" layoutX="223.0" layoutY="193.0" mnemonicParsing="false" onAction="#resetTimer" prefWidth="100.0" text="Restart" />
-                        <Button fx:id="exitClose" layoutX="329.0" layoutY="315.0" mnemonicParsing="false" onAction="#handleExitButton" styleClass="mainPanelButton" text="Wyjdź" />
+                        <Button fx:id="startEggButton" layoutX="93.0" layoutY="193.0" mnemonicParsing="false" onAction="#startStopEggTimer" prefWidth="100.0" styleClass="mainPanelButton">
+                           <graphic>
+                              <ImageView fx:id="startStopImageView1" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@iconplay.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic></Button>
+                        <Button fx:id="resetEggTimer" layoutX="223.0" layoutY="193.0" mnemonicParsing="false" onAction="#resetTimer" prefWidth="100.0" styleClass="mainPanelButton">
+                           <graphic>
+                              <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@iconrefresh.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic></Button>
                      </children>
                   </AnchorPane>
             </content>

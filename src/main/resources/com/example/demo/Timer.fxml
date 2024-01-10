@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.HelloController">
+   <children>
+      <TabPane prefHeight="400.0" prefWidth="400.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab text="Stoper">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="323.0" prefWidth="354.0">
+                     <children>
+                        <Button fx:id="startTimerButton" layoutX="90.0" layoutY="161.0" mnemonicParsing="false" onAction="#startStopTimer" prefWidth="100.0" text="Start" />
+                        <Label fx:id="timeLabel" alignment="CENTER" layoutX="100.0" layoutY="86.0" prefHeight="50.0" prefWidth="200.0" text="00:00:00">
+                           <font>
+                              <Font size="30.0" />
+                           </font>
+                        </Label>
+                        <Button fx:id="restartTimerButton" layoutX="210.0" layoutY="161.0" mnemonicParsing="false" onAction="#resetTimer" prefWidth="100.0" text="Restart" />
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+          <Tab text="Minutnik">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Label fx:id="eggTimeLabel" alignment="CENTER" layoutX="100.0" layoutY="67.0" prefHeight="50.0" prefWidth="200.0" text="00:00:00">
+                           <font>
+                              <Font size="54.0" />
+                           </font>
+                        </Label>
+                        <Button fx:id="hourButton" layoutX="118.0" layoutY="147.0" mnemonicParsing="false" onAction="#addHour" text="+" />
+                        <Button fx:id="secondButton" layoutX="260.0" layoutY="147.0" mnemonicParsing="false" onAction="#addSecond" text="+" />
+                        <Button fx:id="minutButton" layoutX="188.0" layoutY="147.0" mnemonicParsing="false" onAction="#addMinutes" text="+" />
+                        <Button fx:id="startEggButton" layoutX="93.0" layoutY="193.0" mnemonicParsing="false" onAction="#startStopEggTimer" prefWidth="100.0" text="Start" />
+                        <Button fx:id="resetEggTimer" layoutX="223.0" layoutY="193.0" mnemonicParsing="false" onAction="#resetTimer" prefWidth="100.0" text="Restart" />
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+        </tabs>
+      </TabPane>
+   </children>
+</AnchorPane>

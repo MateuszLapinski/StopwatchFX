@@ -6,7 +6,7 @@
 }
 
 .tab-pane{
-    -fx-tab-min-width: 180px;
+    -fx-tab-min-width: 115px;
     -fx-tab-min-height: 30px;
 }
 
@@ -40,3 +40,23 @@
     -fx-background-color: #214b7e;
     -fx-text-fill: WHITE;
 }
+.semicircleRed{
+    -fx-fill: red !important;
+    -fx-border-width: 0;
+}
+.semicircleBlue{
+    -fx-fill: Blue !important;
+    -fx-border-width: 0;
+}
+
+.semicircleWhite{
+    -fx-fill: #e3d8d8 !important;
+    -fx-content-display: none;
+    -fx-border-width: 0;
+}
+.outermost-circle{
+    -fx-fill: black !important;
+    z-index:5;
+}
+
+

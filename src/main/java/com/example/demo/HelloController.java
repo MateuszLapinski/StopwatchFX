@@ -1,44 +1,61 @@
 package com.example.demo;
 
+import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
+import javafx.animation.StrokeTransition;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.Label;
+import javafx.scene.Group;
+import javafx.scene.Parent;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Arc;
+import javafx.scene.shape.Circle;
+import javafx.scene.shape.Line;
+import javafx.scene.shape.StrokeLineCap;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
 import java.net.URL;
+import java.util.Calendar;
 
 
 public class HelloController {
     @FXML
     private Label timeLabel, eggTimeLabel;
     @FXML
-    private Button startTimerButton, resetTimerButton, startEggButton, resetEggButton, hourButton, minuteButton, secondButton, exitButton;
-    //String iconStartPath="/com/example/demo/iconplay.png";
-    //public Image startImage=new Image(iconStartPath);
-//    public Image pauseImage=new Image("/iconpause.png");
-
+    private Button startTimerButton, resetTimerButton, startEggButton, resetEggButton, hourButton, minuteButton, secondButton,
+            hourUPButton, exitButton, minuteUPButton, secondUPButton;
     @FXML
-    private ImageView startStopImageView;
+    private ImageView startStopImageView, startStopEggImageView;
+
+    public Image pauseImage=new Image(getClass().getResourceAsStream("iconpause.png"));
+    public Image startImage=new Image(getClass().getResourceAsStream("iconplay.png"));
+    private StrokeTransition strokeTransition;
+
 
     private int elapsedTime,elapsedTimeEgg,seconds, minutes,hours, secondsEgg,minutesEgg,hoursEgg=0;
+    private int remaningTime= elapsedTime/1000;
     boolean started, startedEgg= false;
     String seconds_string,minutes_string,hours_string, seconds_stringEgg,minutes_stringEgg,hours_stringEgg;
 
     private Timeline timeLine, eggTimerTimeline;
     private Sound sound= new Sound();
+    private Parent root;
 
     private Stage stage;
     public void setStage(Stage stage) {
         this.stage = stage;
     }
+    public void setRoot(Parent root) {
+        this.root = root;
+    }
+
 
     @FXML
     public void initialize() {
@@ -57,15 +74,15 @@ public class HelloController {
 
         if (started == false) {
                 started = true;
-//                if(pauseImage!=null) {
-//                    startStopImageView.setImage(pauseImage);
-//                }
+               if(pauseImage!=null) {
+                   startStopImageView.setImage(pauseImage);
+               }
                 timeLine.play();
         } else {
                 started = false;
-//                if (startImage != null) {
-//                startStopImageView.setImage(startImage);
-//                }
+                if (startImage != null) {
+                startStopImageView.setImage(startImage);
+                }
 
                 timeLine.stop();
         }
@@ -79,19 +96,25 @@ public class HelloController {
         hours=0;
         formatTime(timeLabel);
         started=false;
-        startTimerButton.setText("Start");
+        startStopImageView.setImage(startImage);
         timeLine.stop();
     }
 
     @FXML
     protected void startStopEggTimer() {
-        if (startedEgg == false) {
+        if (startedEgg == false && (hoursEgg+minutesEgg+secondsEgg!=0)) {
             startedEgg = true;
-            startEggButton.setText("Pause");
+            if(pauseImage!=null) {
+                startStopEggImageView.setImage(pauseImage);
+            }
             eggTimerTimeline.play();
+            //updateCircle();
+            hideButtons();
         } else {
             startedEgg = false;
-            startEggButton.setText("Start");
+            if (startImage != null) {
+                startStopEggImageView.setImage(startImage);
+            }
             eggTimerTimeline.stop();
         }
     }
@@ -112,7 +135,8 @@ public class HelloController {
             if(elapsedTimeEgg==0){
                 eggTimerTimeline.stop();
                 startedEgg = false;
-                startEggButton.setText("Start");
+                startStopEggImageView.setImage(startImage);
+                showButtons();
                 sound.play();
             }
             formatTimeEgg(eggTimeLabel);
@@ -156,13 +180,33 @@ public class HelloController {
         }
         formatTimeEgg(eggTimeLabel);
     }
-
-    protected void getSound(){
-        for(int i=0; i<=3;i++){
-            sound.play();
+    @FXML
+    protected void subHour() {
+        if (hoursEgg >= 1) {
+            hoursEgg--;
+            formatTimeEgg(eggTimeLabel);
+            elapsedTimeEgg -= 3600000;
         }
-        sound.stop();
     }
+    @FXML
+    protected void subMinutes() {
+        if(minutesEgg>=1){
+            minutesEgg--;
+            elapsedTimeEgg-=60000;
+        }
+        formatTimeEgg(eggTimeLabel);
+
+    }
+    @FXML
+    protected void subSecond() {
+        if(secondsEgg>=1){
+            secondsEgg--;
+            System.out.println(elapsedTimeEgg);
+            elapsedTimeEgg-=1000;
+        }
+        formatTimeEgg(eggTimeLabel);
+    }
+
 
     @FXML
     public void handleExitButton(ActionEvent event) {
@@ -173,6 +217,24 @@ public class HelloController {
             stage.close();
         }
     }
+
+    private void hideButtons(){
+        hourButton.setVisible(false);
+        hourUPButton.setVisible(false);
+        minuteButton.setVisible(false);
+        minuteUPButton.setVisible(false);
+        secondButton.setVisible(false);
+        secondUPButton.setVisible(false);
+    }
+    private void showButtons(){
+        hourButton.setVisible(true);
+        hourUPButton.setVisible(true);
+        minuteButton.setVisible(true);
+        minuteUPButton.setVisible(true);
+        secondButton.setVisible(true);
+        secondUPButton.setVisible(true);
+    }
+
 
 }
 
